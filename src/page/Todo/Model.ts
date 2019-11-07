@@ -10,6 +10,10 @@ export type State = BaseState & {
   todoList: Todo[]
 }
 
+export const initialState = {
+  todoList: []
+}
+
 export const ADD_TODO: Action<State, Todo> = (state, todo) => {
   let todoList = state.todoList
   todoList.push(todo)
