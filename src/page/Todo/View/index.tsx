@@ -1,15 +1,17 @@
 import React from 'react'
 
+import Layout from '../../../component/Layout'
+
 import TodoHeader from './TodoHeader'
-import TodoList from './TodoList'
+import TodoMain from './TodoMain'
 import TodoFooter from './TodoFooter'
 
 export default function View() {
   return (
-    <div>
+    <Layout>
       <TodoHeader />
-      <TodoList />
+      <TodoMain />
       <TodoFooter />
-    </div>
+    </Layout>
   )
 }
