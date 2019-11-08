@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { useModel } from 'react-imvc/hook'
 
 import * as Model from '../Model'
+import { Showing } from '../constants'
 import TodoItem from './TodoItem'
 
 type Actions = Omit<typeof Model, 'initialState'>
@@ -12,7 +13,21 @@ export default function TodoList() {
     return todo.completed === false
   }), [state.todoList])
   const items = useMemo(() => {
-    return state.todoList.map((todo) => {
+    let tl = state.todoList.slice()
+
+    if (state.currentShowing === Showing.ACTIVE) {
+      tl = tl.filter((todo) => {
+        return !todo.completed
+      })
+    }
+
+    if (state.currentShowing === Showing.COMPLETED) {
+      tl = tl.filter((todo) => {
+        return todo.completed
+      })
+    }
+
+    return tl.map((todo) => {
       const onSave = (title: string) => {
         if (state.editing === todo.id) {
           const { UPDATE_EDITING_TITLE } = actions
@@ -57,7 +72,15 @@ export default function TodoList() {
         />
       )
     })
-  }, [state.todoList])
+  }, [state.todoList, state.currentShowing])
+
+  const toggleAll = () => {
+    const { TOGGLE_ALL } = actions
+    const completed = !state.todoList.every((todo) => {
+      return todo.completed
+    })
+    TOGGLE_ALL(completed)
+  }
 
   return (
     <section className="main">
@@ -65,7 +88,7 @@ export default function TodoList() {
         id="toggle-all"
         className="toggle-all"
         type="checkbox"
-        onChange={ e => this.toggleAll(e) }
+        onChange={toggleAll}
         checked={hasActiveTodo}
       />
       <label

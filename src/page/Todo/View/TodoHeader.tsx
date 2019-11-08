@@ -24,13 +24,14 @@ function uuid() {
 
 export default function TodoHeader() {
   const [title, setTitle] = useState('')
+  const actions = useModelActions<Model.State, Actions>()
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    event.preventDefault()
     const t = title
 
     if (event.keyCode === ENTER_KEY) {
-      const { ADD_TODO } = useModelActions<Model.State, Actions>()
+      event.preventDefault()
+      const { ADD_TODO } = actions
       const todo: Model.Todo = {
         id: uuid(),
         title: t,
@@ -38,6 +39,7 @@ export default function TodoHeader() {
       }
 
       ADD_TODO(todo)
+      setTitle('')
     }
   }
 

@@ -80,7 +80,6 @@ export default function TodoItem({
         <button className="destroy" onClick={onDestroy} />
       </div>
       <input
-        ref="editField"
         className="edit"
         value={editText}
         onBlur={handleSubmit}

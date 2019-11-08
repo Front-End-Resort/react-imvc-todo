@@ -17,7 +17,7 @@ export default function TodoFooter() {
       }
     })
     return count
-  }, [state.todo])
+  }, [state.todoList])
   const completedCount = useMemo(() => {
     let count = 0
     state.todoList.forEach((todo) => {
@@ -26,7 +26,7 @@ export default function TodoFooter() {
       }
     })
     return count
-  }, [state.todo])
+  }, [state.todoList])
   const activeTodoWord = useMemo(() => {
     return count > 1 ? 'items' : 'item'
   }, [count])
@@ -44,6 +44,11 @@ export default function TodoFooter() {
     null
   }, [completedCount])
 
+  const handleTagClick = (showing: Showing) => {
+    const { TOGGLE_SHOWING } = actions
+    TOGGLE_SHOWING(showing)
+  }
+
   return (
     <footer className="footer">
       <span className="todo-count">
@@ -52,6 +57,7 @@ export default function TodoFooter() {
       <ul className="filters">
         <li>
           <a
+            onClick={() => handleTagClick(Showing.ALL)}
             className={classNames({selected: state.currentShowing === Showing.ALL})}>
               All
           </a>
@@ -59,6 +65,7 @@ export default function TodoFooter() {
         {' '}
         <li>
           <a
+            onClick={() => handleTagClick(Showing.ACTIVE)}
             className={classNames({selected: state.currentShowing === Showing.ACTIVE})}>
               Active
           </a>
@@ -66,7 +73,7 @@ export default function TodoFooter() {
         {' '}
         <li>
           <a
-
+            onClick={() => handleTagClick(Showing.COMPLETED)}
             className={classNames({selected: state.currentShowing === Showing.COMPLETED})}>
               Completed
           </a>
