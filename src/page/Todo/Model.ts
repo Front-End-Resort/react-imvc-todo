@@ -21,6 +21,13 @@ export const initialState = {
   editing: null
 }
 
+export const INITIAL_TODO_LIST: Action<State, Todo[]> = (state, todoList) => {
+  return {
+    ...state,
+    todoList
+  }
+}
+
 export const ADD_TODO: Action<State, Todo> = (state, todo) => {
   let todoList = state.todoList.slice()
   todoList.unshift(todo)

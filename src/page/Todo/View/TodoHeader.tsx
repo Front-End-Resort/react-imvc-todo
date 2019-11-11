@@ -29,7 +29,7 @@ export default function TodoHeader() {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const t = title
 
-    if (event.keyCode === ENTER_KEY) {
+    if (event.keyCode === ENTER_KEY && title !== '') {
       event.preventDefault()
       const { ADD_TODO } = actions
       const todo: Model.Todo = {
