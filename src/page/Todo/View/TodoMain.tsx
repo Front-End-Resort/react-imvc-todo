@@ -30,14 +30,16 @@ export default function TodoList() {
     return tl.map((todo) => {
       const onSave = (title: string) => {
         if (state.editing === todo.id) {
-          const { UPDATE_EDITING_TITLE } = actions
+          const { UPDATE_EDITING_TITLE, STOP_EDITING } = actions
           UPDATE_EDITING_TITLE(title)
+          STOP_EDITING()
         }
       }
 
       const onDestory = () => {
-        const { REMOVE_TODO } = actions
+        const { REMOVE_TODO, STOP_EDITING } = actions
         REMOVE_TODO(todo.id)
+        STOP_EDITING()
       }
 
       const onEdit = () => {
@@ -72,7 +74,7 @@ export default function TodoList() {
         />
       )
     })
-  }, [state.todoList, state.currentShowing])
+  }, [state.todoList, state.currentShowing, state.editing])
 
   const toggleAll = () => {
     const { TOGGLE_ALL } = actions

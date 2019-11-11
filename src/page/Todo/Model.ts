@@ -23,7 +23,7 @@ export const initialState = {
 
 export const ADD_TODO: Action<State, Todo> = (state, todo) => {
   let todoList = state.todoList.slice()
-  todoList.push(todo)
+  todoList.unshift(todo)
   
   return {
     ...state,

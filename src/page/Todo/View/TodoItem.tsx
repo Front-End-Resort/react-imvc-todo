@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useEffect, useRef } from 'react'
 import classNames from 'classnames'
 import * as Model from '../Model'
 
@@ -25,6 +25,7 @@ export default function TodoItem({
   onCancel,
   onToggle
 }: Props) {
+  const inputEl = useRef<HTMLInputElement>(null)
   const [editText, setEditText] = useState(todo.title)
   const isSelfEditing = useMemo(() => {
     return (
@@ -32,6 +33,11 @@ export default function TodoItem({
       todo.id === editing
     )
   }, [todo, editing])
+  useEffect(() => {
+    if (isSelfEditing) {
+      inputEl.current.focus()
+    }
+  }, [isSelfEditing])
 
   const handleEdit = (): void => {
     onEdit()
@@ -58,7 +64,7 @@ export default function TodoItem({
       setEditText(todo.title)
       onCancel()
     } else if (event.keyCode === ENTER_KEY) {
-      this.handleSubmit(event);
+      handleSubmit()
     }
   }
 
@@ -80,6 +86,7 @@ export default function TodoItem({
         <button className="destroy" onClick={onDestroy} />
       </div>
       <input
+        ref={inputEl}
         className="edit"
         value={editText}
         onBlur={handleSubmit}
