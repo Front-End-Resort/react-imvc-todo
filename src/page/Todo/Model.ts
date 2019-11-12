@@ -29,9 +29,8 @@ export const INITIAL_TODO_LIST: Action<State, Todo[]> = (state, todoList) => {
 }
 
 export const ADD_TODO: Action<State, Todo> = (state, todo) => {
-  let todoList = state.todoList.slice()
-  todoList.unshift(todo)
-  
+  let todoList = [todo, ...state.todoList]
+
   return {
     ...state,
     todoList
@@ -39,45 +38,31 @@ export const ADD_TODO: Action<State, Todo> = (state, todo) => {
 }
 
 export const REMOVE_TODO: Action<State, string> = (state, todoId) => {
-  const todoList = state.todoList
-  let newTodoList: Todo[] = []
-
-  todoList.forEach((todo) => {
-    if (todo.id !== todoId) {
-      newTodoList.push(todo)
-    }
-  })
+  const todoList = state.todoList.filter(todo => todo.id !== todoId)
 
   return {
     ...state,
-    todoList: newTodoList
+    todoList
   }
 }
 
 export const REMOVE_COMPLETED_TODO: Action<State> = (state) => {
-  const todoList = state.todoList
-  let newTodoList: Todo[] = []
-
-  todoList.forEach((todo) => {
-    if (!todo.completed) {
-      newTodoList.push(todo)
-    }
-  })
+  const todoList = state.todoList.filter(todo => !todo.completed)
 
   return {
     ...state,
-    todoList: newTodoList
+    todoList
   }
 }
 
 export const TOGGLE_ALL: Action<State, boolean> = (state, completed) => {
-  let todoList = state.todoList
-
-  todoList = todoList.map((todo) => {
-    todo.completed = completed
-    return todo
+  let todoList = state.todoList.map(todo => {
+    return {
+      ...todo,
+      completed
+    }
   })
-  
+
   return {
     ...state,
     todoList
@@ -85,13 +70,13 @@ export const TOGGLE_ALL: Action<State, boolean> = (state, completed) => {
 }
 
 export const TOGGLE_ONE: Action<State, string> = (state, todoId) => {
-  let todoList = state.todoList
+  let todoList = state.todoList.map(todo => {
+    if (todo.id !== todoId) return todo
 
-  todoList = todoList.map((t) => {
-    if (t.id === todoId) {
-      t.completed = !t.completed
+    return {
+      ...todo,
+      completed: !todo.completed
     }
-    return t
   })
 
   return {
@@ -100,10 +85,10 @@ export const TOGGLE_ONE: Action<State, string> = (state, todoId) => {
   }
 }
 
-export const TOGGLE_SHOWING: Action<State, Showing> = (state, showing) => {
+export const TOGGLE_SHOWING: Action<State, Showing> = (state, currentShowing) => {
   return {
     ...state,
-    currentShowing: showing
+    currentShowing
   }
 }
 
@@ -123,17 +108,17 @@ export const STOP_EDITING: Action<State> = (state) => {
 
 
 export const UPDATE_EDITING_TITLE: Action<State, string> = (state, title) => {
-  let todoList = state.todoList
-  
-  todoList = todoList.map((t) => {
-    if (t.id === state.editing) {
-      t.title = title
-    }
+  let todoList = state.todoList.map(todo => {
+    if (todo.id !== state.editing) return todo
 
-    return t
+    return {
+      ...todo,
+      title
+    }
   })
 
   return {
-    ...state
+    ...state,
+    todoList
   }
 }

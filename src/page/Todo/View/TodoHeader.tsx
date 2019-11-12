@@ -27,14 +27,12 @@ export default function TodoHeader() {
   const actions = useModelActions<Model.State, Actions>()
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const t = title
-
     if (event.keyCode === ENTER_KEY && title !== '') {
       event.preventDefault()
       const { ADD_TODO } = actions
       const todo: Model.Todo = {
         id: uuid(),
-        title: t,
+        title,
         completed: false
       }
 

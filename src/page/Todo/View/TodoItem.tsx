@@ -9,11 +9,11 @@ interface Props {
   key: string
   todo: Model.Todo
   editing : string | null
-  onSave: (title: string) => void
-  onDestroy: () => void
-  onEdit: ()  => void
-  onCancel: () => void
-  onToggle: () => void
+  onSave: (todoId: string, title: string) => void
+  onDestroy: (todoId: string) => void
+  onEdit: (todoId: string)  => void
+  onCancel: (todoId: string) => void
+  onToggle: (todoId: string) => void
 }
 
 export default function TodoItem({
@@ -26,32 +26,41 @@ export default function TodoItem({
   onToggle
 }: Props) {
   const inputEl = useRef<HTMLInputElement>(null)
-  const [editText, setEditText] = useState(todo.title)
+  const [editText, setEditText] = useState('')
   const isSelfEditing = useMemo(() => {
     return (
       editing !== null &&
       todo.id === editing
     )
   }, [todo, editing])
+  
   useEffect(() => {
-    if (isSelfEditing && inputEl && inputEl.current) {
+    if (isSelfEditing && inputEl.current) {
       inputEl.current.focus()
     }
   }, [isSelfEditing])
 
+  const handleToggle = () => {
+    onToggle(todo.id)
+  }
+
+  const handleDelete = () => {
+    onDestroy(todo.id)
+  }
+
   const handleEdit = (): void => {
-    onEdit()
     setEditText(todo.title)
+    onEdit(todo.id)
   }
 
   const handleSubmit = (): void => {
-    const title = editText.slice()
+    const title = editText
 
     if (title) {
-      onSave(title)
+      onSave(todo.id, title)
       setEditText(title)
     } else {
-      onDestroy()
+      onDestroy(todo.id)
     }
   }
 
@@ -62,7 +71,7 @@ export default function TodoItem({
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
     if (event.keyCode === ESCAPE_KEY) {
       setEditText(todo.title)
-      onCancel()
+      onCancel(todo.id)
     } else if (event.keyCode === ENTER_KEY) {
       handleSubmit()
     }
@@ -78,12 +87,12 @@ export default function TodoItem({
           className="toggle"
           type="checkbox"
           checked={todo.completed}
-          onChange={onToggle}
+          onChange={handleToggle}
         />
         <label onDoubleClick={handleEdit}>
           {todo.title}
         </label>
-        <button className="destroy" onClick={onDestroy} />
+        <button className="destroy" onClick={handleDelete} />
       </div>
       <input
         ref={inputEl}

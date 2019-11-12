@@ -9,9 +9,11 @@ type Actions = Omit<typeof Model, 'initialState'>
 
 export default function TodoList() {
   const [state, actions] = useModel<Model.State, Actions>();
-  const hasActiveTodo = useMemo(() => state.todoList.some((todo) => {
+
+  const hasActiveTodo = state.todoList.some((todo) => {
     return todo.completed === false
-  }), [state.todoList])
+  })
+
   const items = useMemo(() => {
     let tl = state.todoList.slice()
 
@@ -28,39 +30,6 @@ export default function TodoList() {
     }
 
     return tl.map((todo) => {
-      const onSave = (title: string) => {
-        if (state.editing === todo.id) {
-          const { UPDATE_EDITING_TITLE, STOP_EDITING } = actions
-          UPDATE_EDITING_TITLE(title)
-          STOP_EDITING()
-        }
-      }
-
-      const onDestory = () => {
-        const { REMOVE_TODO, STOP_EDITING } = actions
-        REMOVE_TODO(todo.id)
-        STOP_EDITING()
-      }
-
-      const onEdit = () => {
-        if (state.editing === null) {
-          const { START_EDITING } = actions
-          START_EDITING(todo.id)
-        }
-      }
-
-      const onChange = () => {
-        if (state.editing === todo.id) {
-          const { STOP_EDITING } = actions
-          STOP_EDITING()
-        }
-      }
-
-      const onToggle = () => {
-        const { TOGGLE_ONE } = actions
-        TOGGLE_ONE(todo.id)
-      }
-
       return (
         <TodoItem
           key={todo.id}
@@ -76,6 +45,41 @@ export default function TodoList() {
     })
   }, [state.todoList, state.currentShowing, state.editing])
 
+  // item
+  const onSave = (todoId: string, title: string) => {
+    if (state.editing === todoId) {
+      const { UPDATE_EDITING_TITLE, STOP_EDITING } = actions
+      UPDATE_EDITING_TITLE(title)
+      STOP_EDITING()
+    }
+  }
+
+  const onDestory = (todoId: string) => {
+    const { REMOVE_TODO, STOP_EDITING } = actions
+    REMOVE_TODO(todoId)
+    STOP_EDITING()
+  }
+
+  const onEdit = (todoId: string) => {
+    if (state.editing === null) {
+      const { START_EDITING } = actions
+      START_EDITING(todoId)
+    }
+  }
+
+  const onChange = (todoId: string) => {
+    if (state.editing === todoId) {
+      const { STOP_EDITING } = actions
+      STOP_EDITING()
+    }
+  }
+
+  const onToggle = (todoId: string) => {
+    const { TOGGLE_ONE } = actions
+    TOGGLE_ONE(todoId)
+  }
+
+  // all
   const toggleAll = () => {
     const { TOGGLE_ALL } = actions
     const completed = !state.todoList.every((todo) => {
