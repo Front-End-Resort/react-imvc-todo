@@ -34,7 +34,7 @@ export default function TodoItem({
     )
   }, [todo, editing])
   useEffect(() => {
-    if (isSelfEditing) {
+    if (isSelfEditing && inputEl && inputEl.current) {
       inputEl.current.focus()
     }
   }, [isSelfEditing])
