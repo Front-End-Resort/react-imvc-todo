@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { useModelActions } from 'react-imvc/hook'
-import * as Model from '../Model'
-
-type Actions = Omit<typeof Model, 'initialState'>
+import { State, Actions, Todo } from 'Todo'
 
 const ENTER_KEY = 13
 
@@ -24,13 +22,13 @@ function uuid() {
 
 export default function TodoHeader() {
   const [title, setTitle] = useState('')
-  const actions = useModelActions<Model.State, Actions>()
+  const actions = useModelActions<State, Actions>()
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === ENTER_KEY && title !== '') {
       event.preventDefault()
       const { ADD_TODO } = actions
-      const todo: Model.Todo = {
+      const todo: Todo = {
         id: uuid(),
         title,
         completed: false

@@ -1,14 +1,11 @@
 import React, { useMemo } from 'react'
 import classNames from 'classnames'
-import { Showing } from '../constants'
 import { useModel } from 'react-imvc/hook'
 
-import * as Model from '../Model'
-
-type Actions = Omit<typeof Model, 'initialState'>
+import { Showing, State, Actions } from 'Todo'
 
 export default function TodoFooter() {
-  const [state, actions] = useModel<Model.State, Actions>()
+  const [state, actions] = useModel<State, Actions>()
 
   const { count, completedCount } = useMemo(() => {
     let count = state.todoList.filter(todo => !todo.completed).length

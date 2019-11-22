@@ -1,14 +1,11 @@
 import React, { useMemo } from 'react'
 import { useModel } from 'react-imvc/hook'
+import { Showing, State, Actions } from 'Todo'
 
-import * as Model from '../Model'
-import { Showing } from '../constants'
 import TodoItem from './TodoItem'
 
-type Actions = Omit<typeof Model, 'initialState'>
-
 export default function TodoList() {
-  const [state, actions] = useModel<Model.State, Actions>();
+  const [state, actions] = useModel<State, Actions>();
 
   const hasActiveTodo = state.todoList.some((todo) => {
     return todo.completed === false

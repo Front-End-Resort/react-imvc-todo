@@ -1,13 +1,13 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react'
 import classNames from 'classnames'
-import * as Model from '../Model'
+import { Todo } from 'Todo'
 
 const ENTER_KEY = 13
 const ESCAPE_KEY = 27
 
 interface Props {
   key: string
-  todo: Model.Todo
+  todo: Todo
   editing : string | null
   onSave: (todoId: string, title: string) => void
   onDestroy: (todoId: string) => void

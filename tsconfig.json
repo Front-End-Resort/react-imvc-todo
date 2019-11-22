@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
-    "outDir": "dist",
-    "declaration": true,
+    "baseUrl": ".",
     "sourceMap": false,
     "target": "es5",
     "module": "commonjs",
@@ -10,6 +8,8 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "allowJs": false,
+    "checkJs": false,
+    "declaration": true,
     "noUnusedLocals": true,
     "strict": true,
     "noImplicitAny": true,
@@ -21,8 +21,12 @@
     "removeComments": false,
     "jsx": "react",
     "lib": ["esnext", "dom.iterable", "dom"],
-    "types": ["jest", "node"],
-    "rootDir": "./src"
+    "types": ["jest", "node", "express"],
+    "rootDir": ".",
+    "outDir": "dist",
+    "paths": {
+      "Todo": ["src/page/Todo/type.d.ts"]
+    }
   },
   "include": [
     "src"
