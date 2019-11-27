@@ -1,9 +1,10 @@
 import Controller from 'react-imvc/controller'
 import * as Model from './Model'
 import View from './View'
-import { State, Actions } from 'Todo'
 
-export default class Todo extends Controller<State, Actions> {
+export type Actions = Omit<typeof Model, 'initialState'>
+
+export default class Todo extends Controller<Model.State, Actions> {
   View = View
   Model = Model
 

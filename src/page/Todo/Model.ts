@@ -1,6 +1,18 @@
-import { Action } from 'react-imvc'
-import { Showing, State, Todo } from 'Todo'
+import { BaseState, Action } from 'react-imvc'
+import { Showing } from './constant'
 
+export type State = BaseState & {
+  todoList: Todo[]
+  completedTodoIds: string[]
+  currentShowing: Showing
+  editing: string | null
+}
+
+export interface Todo {
+  id: string,
+  title: string,
+  completed: boolean
+}
 export const initialState = {
   todoList: [],
   completedTodoIds: [],

@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react'
 import { useModel } from 'react-imvc/hook'
-import { Showing, State, Actions } from 'Todo'
+import { State } from '../Model'
+import { Showing } from '../constant'
+import { Actions } from '../Controller'
 
 import TodoItem from './TodoItem'
 

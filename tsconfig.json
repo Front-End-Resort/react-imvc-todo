@@ -25,7 +25,6 @@
     "rootDir": ".",
     "outDir": "dist",
     "paths": {
-      "Todo": ["src/page/Todo/type.d.ts"]
     }
   },
   "include": [

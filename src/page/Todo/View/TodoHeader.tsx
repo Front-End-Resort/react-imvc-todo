@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useModelActions } from 'react-imvc/hook'
-import { State, Actions, Todo } from 'Todo'
+import { State, Todo } from '../Model'
+import { Actions } from '../Controller'
 
 const ENTER_KEY = 13
 
