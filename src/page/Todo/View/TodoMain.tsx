@@ -13,37 +13,6 @@ export default function TodoList() {
     return todo.completed === false
   })
 
-  const items = useMemo(() => {
-    let tl = state.todoList.slice()
-
-    if (state.currentShowing === Showing.ACTIVE) {
-      tl = tl.filter((todo) => {
-        return !todo.completed
-      })
-    }
-
-    if (state.currentShowing === Showing.COMPLETED) {
-      tl = tl.filter((todo) => {
-        return todo.completed
-      })
-    }
-
-    return tl.map((todo) => {
-      return (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          editing={state.editing}
-          onSave={onSave}
-          onDestroy={onDestory}
-          onEdit={onEdit}
-          onCancel={onChange}
-          onToggle={onToggle}
-        />
-      )
-    })
-  }, [state.todoList, state.currentShowing, state.editing])
-
   // item
   const onSave = (todoId: string, title: string) => {
     if (state.editing === todoId) {
@@ -77,6 +46,37 @@ export default function TodoList() {
     const { TOGGLE_ONE } = actions
     TOGGLE_ONE(todoId)
   }
+
+  const items = useMemo(() => {
+    let tl = state.todoList.slice()
+
+    if (state.currentShowing === Showing.ACTIVE) {
+      tl = tl.filter((todo) => {
+        return !todo.completed
+      })
+    }
+
+    if (state.currentShowing === Showing.COMPLETED) {
+      tl = tl.filter((todo) => {
+        return todo.completed
+      })
+    }
+
+    return tl.map((todo) => {
+      return (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          editing={state.editing}
+          onSave={onSave}
+          onDestory={onDestory}
+          onEdit={onEdit}
+          onCancel={onChange}
+          onToggle={onToggle}
+        />
+      )
+    })
+  }, [state.todoList, state.currentShowing, state.editing])
 
   // all
   const toggleAll = () => {

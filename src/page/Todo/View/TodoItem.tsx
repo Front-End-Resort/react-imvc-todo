@@ -10,7 +10,7 @@ interface Props {
   todo: Todo
   editing : string | null
   onSave: (todoId: string, title: string) => void
-  onDestroy: (todoId: string) => void
+  onDestory: (todoId: string) => void
   onEdit: (todoId: string)  => void
   onCancel: (todoId: string) => void
   onToggle: (todoId: string) => void
@@ -20,7 +20,7 @@ export default function TodoItem({
   todo,
   editing,
   onSave,
-  onDestroy,
+  onDestory,
   onEdit,
   onCancel,
   onToggle
@@ -45,7 +45,7 @@ export default function TodoItem({
   }
 
   const handleDelete = () => {
-    onDestroy(todo.id)
+    onDestory(todo.id)
   }
 
   const handleEdit = (): void => {
@@ -60,7 +60,7 @@ export default function TodoItem({
       onSave(todo.id, title)
       setEditText(title)
     } else {
-      onDestroy(todo.id)
+      onDestory(todo.id)
     }
   }
 

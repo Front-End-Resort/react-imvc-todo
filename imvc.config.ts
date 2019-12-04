@@ -1,6 +1,6 @@
 import { Config } from 'react-imvc'
 
-let PORT = 33333
+let PORT = 3000
 const ROOT = __dirname
 
 const config: Partial<Config> = {
