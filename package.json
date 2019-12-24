@@ -2,7 +2,7 @@
   "name": "react-imvc-todo",
   "version": "1.0.0",
   "description": "A todo example of react-imvc@3.0.0.",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "react-imvc start --config imvc.config.ts",
     "build": "react-imvc build --config imvc.config.ts",
@@ -31,7 +31,7 @@
     "classnames": "^2.2.6",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-imvc": "^3.0.0-beta.30",
+    "react-imvc": "^3.0.0-beta.33",
     "typescript": "^3.6.3"
   }
 }
