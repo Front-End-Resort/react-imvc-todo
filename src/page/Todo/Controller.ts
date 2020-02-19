@@ -1,4 +1,5 @@
 import Controller from 'react-imvc/controller'
+import createLogger from 'relite/logger'
 import * as Model from './Model'
 import View from './View'
 
@@ -21,5 +22,6 @@ export default class Todo extends Controller<Model.State, Actions> {
     this.store.subscribe((data) => {
       localStorage.setItem('react-imvc-todo', JSON.stringify(data.currentState.todoList))
     })
+    this.store.subscribe(createLogger())
   }
 }
