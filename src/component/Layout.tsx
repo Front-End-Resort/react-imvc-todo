@@ -1,6 +1,5 @@
 import React from 'react'
 import { Style } from 'react-imvc/component'
-import ErrorBoundary from 'react-imvc/component/ErrorBoundary'
 
 export default function Layout({ children }: React.PropsWithChildren<{}>) {
   return (

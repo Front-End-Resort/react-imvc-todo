@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react'
 import classNames from 'classnames'
-import { Todo } from '../Model'
+import type { Todo } from '../Model'
 
 const ENTER_KEY = 13
 const ESCAPE_KEY = 27

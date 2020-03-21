@@ -1,4 +1,4 @@
-import { BaseState, Action } from 'react-imvc'
+import type { BaseState, Action } from 'react-imvc'
 import { Showing } from './constant'
 
 export type State = BaseState & {

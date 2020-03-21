@@ -2,9 +2,9 @@ import React, { useMemo } from 'react'
 import classNames from 'classnames'
 import { useModel } from 'react-imvc/hook'
 
-import { State } from '../Model'
 import { Showing } from '../constant'
-import { Actions } from '../Controller'
+import type { State } from '../Model'
+import type { Actions } from '../Controller'
 
 export default function TodoFooter() {
   const [state, actions] = useModel<State, Actions>()
