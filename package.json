@@ -1,37 +1,37 @@
 {
-  "name": "react-imvc-todo",
-  "version": "1.0.0",
-  "description": "A todo example of react-imvc@3.0.0.",
-  "private": true,
-  "scripts": {
-    "start": "react-imvc start --config imvc.config.ts",
-    "build": "react-imvc build --config imvc.config.ts",
-    "test": "react-imvc test --config imvc.config.ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tqma113/react-imvc-todo.git"
-  },
-  "keywords": [
-    "react",
-    "react",
-    "imvc",
-    "todo"
-  ],
-  "author": "Ma Tianqi",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tqma113/react-imvc-todo/issues"
-  },
-  "homepage": "https://github.com/tqma113/react-imvc-todo#readme",
-  "dependencies": {
-    "@types/classnames": "^2.2.9",
-    "@types/react": "^16.9.11",
-    "@types/react-dom": "^16.9.3",
-    "classnames": "^2.2.6",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-imvc": "^3.0.0-beta.43",
-    "typescript": "^3.8.3"
-  }
+    "name": "react-imvc-todo",
+    "version": "1.0.0",
+    "description": "A todo example of react-imvc@3.0.0.",
+    "private": true,
+    "scripts": {
+        "start": "react-imvc start --config imvc.config.ts",
+        "build": "react-imvc build --config imvc.config.ts",
+        "test": "react-imvc test --config imvc.config.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Front-End-Resort/react-imvc-todo.git"
+    },
+    "keywords": [
+        "react",
+        "react",
+        "imvc",
+        "todo"
+    ],
+    "author": "Ma Tianqi",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Front-End-Resort/react-imvc-todo/issues"
+    },
+    "homepage": "https://github.com/Front-End-Resort/react-imvc-todo#readme",
+    "dependencies": {
+        "@types/classnames": "^2.2.9",
+        "@types/react": "^16.9.11",
+        "@types/react-dom": "^16.9.3",
+        "classnames": "^2.2.6",
+        "react": "^16.11.0",
+        "react-dom": "^16.11.0",
+        "react-imvc": "^3.0.0",
+        "typescript": "^3.8.3"
+    }
 }
